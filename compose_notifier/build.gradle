@@ -1,12 +1,30 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
+
+group = 'com.lib.compose_notifier'
+version = '1.0'
 
 android {
     namespace 'com.lib.compose_notifier'
     compileSdk 32
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+
+        multipleVariants {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
+
+    
     defaultConfig {
         minSdk 21
         targetSdk 32
@@ -38,4 +56,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.lib.compose_notifier'
+                artifactId = 'demo-simple-android-lib'
+                version = '0.0.1'
+
+                afterEvaluate {
+                    from components.release
+                }
+            }
+        }
+    }
 }
