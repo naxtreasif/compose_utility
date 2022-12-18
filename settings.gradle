@@ -17,5 +17,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "compose_utility"
-include ':app'
 include ':compose_notifier'

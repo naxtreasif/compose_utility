@@ -20,3 +20,15 @@ plugins {
 }
 //apply from: "${rootDir}/scripts/publish-root.gradle"
 apply plugin: 'io.github.gradle-nexus.publish-plugin'
+
+
+// Publish to Maven Central
+nexusPublishing {
+    repositories {
+        sonatype {
+            username.set('asif.naxtre')
+            password.set('Sonatype#2022')
+            stagingProfileId.set('20fe104519ea2')
+        }
+    }
+}
